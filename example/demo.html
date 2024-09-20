@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+<body>
+    <div id="app">
+        <div class="box a"></div>
+        <div class="page"></div>
+        <div class="page"></div>
+        <div class="page pg1">
+            <div class="box"></div>
+        </div>
+        <div class="page"></div>
+        <div class="page"></div>
+        <div class="page"></div>
+        <div class="page"></div>
+        <div class="page"></div>
+        <div class="page"></div>
+        <div class="box b"></div>
+    </div>
+</body>
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.fromTo(".a", {
+        x: 0,
+        rotation: 0,
+    }, {
+        x: function () { return window.innerWidth - 250 },
+        duration: 5,
+        rotation: 360,
+        scrollTrigger: {
+            trigger: ".a",
+            scrub: true,
+            start: "center center",
+            end: "center top",
+            scroller: "#app",
+            // markers: true,
+            pin: true,
+        }
+    })
+    gsap.fromTo(
+        ".pg1 .box",{
+            "backgroundColor":"#f00",
+        },{
+            "backgroundColor":"#000",
+            scrollTrigger:{
+                trigger:".pg1",
+                end:"2000 top",
+                scrub:true,
+                scroller:"#app",
+                pin:true,
+                markers:true,
+            }
+        }
+    )
+    // let tl = gsap.timeline({
+    //     scrollTrigger: {
+    //         scroller: "#app",
+    //         trigger: ".a",
+    //         start: "center center",
+    //         end: "bottom top",
+    //         scrub: true,
+    //         markers: true,
+    //         pin: true,
+    //         id: "scrub"
+    //     }
+    // })
+    // tl.to(".a", {
+    //     duration: 1,
+    //     x: window.innerHeight,
+    //     rotation: 360,
+    // })
+    //     .to(".a", {
+    //         duration: 2,
+    //         scale: 2
+    //     });
+
+</script>
+
+</html>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    #app {
+        width: 100vw;
+        height: 100vh;
+        overflow: auto;
+        position: relative;
+        overflow-x: hidden;
+        /* background-image: url("./W020230525015113107184.jpg");
+        background-repeat: repeat; */
+    }
+
+    .box {
+        width: 250px;
+        height: 250px;
+        border-radius: 25px;
+        background: #ff0000;
+        position: absolute;
+    }
+
+    .a {
+        top: 1000px;
+        background-image: url("./W020230525015113107184.jpg");
+        background-size: cover;
+    }
+
+    .b {
+        top: 10000px;
+    }
+
+    .page {
+        width: 100vw;
+        height: 100vh;
+        border: 5px solid #ff0101;
+    }
+</style>
